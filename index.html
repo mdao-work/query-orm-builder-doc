@@ -58,31 +58,43 @@
 	<div class="row">
 		<div class="col-8 col-content">
 			<div class="tsd-panel tsd-typography">
+				<a href="#queryormbuilder---语义化查询构造器" id="queryormbuilder---语义化查询构造器" style="color: inherit; text-decoration: none;">
+					<h2>QueryOrmBuilder - 语义化查询构造器</h2>
+				</a>
 				<a href="#简介" id="简介" style="color: inherit; text-decoration: none;">
 					<h1>简介</h1>
 				</a>
-				<p>url 语义化，自定义查询结果，去除重复数据，节省流量提高速度。 提高开发效率</p>
-				<p><a href="https://mdao-work.github.io/query-orm-builder-doc/index.html">详细文档</a></p>
+				<p>语义化查询url构造器，根据规则生成对应查询请求url，自定义查询结果，去除重复数据，节省流量提高速度，提高开发效率
+				<a href="https://mdao-work.github.io/query-orm-builder-doc/index.html">详细文档</a></p>
+				<p>注意：本组件需配合后端解析类[QueryOrmServer]使用 <a href="https://github.com/mdao-work/query-orm-server">源码地址</a></p>
 				<a href="#安装" id="安装" style="color: inherit; text-decoration: none;">
 					<h1>安装</h1>
 				</a>
-				<p>通过 npm 安装
-				在现有项目中使用 QueryOrmBuilder 时，可以通过 npm进行安装：</p>
+				<p>1、通过 npm 方式安装使用</p>
+				<p>在现有项目中使用 QueryOrmBuilder 时，可以通过 npm 进行安装：</p>
 				<pre><code><span style="color: #001080">npm</span><span style="color: #000000"> </span><span style="color: #001080">i</span><span style="color: #000000"> </span><span style="color: #001080">query</span><span style="color: #000000">-</span><span style="color: #001080">orm</span><span style="color: #000000">-</span><span style="color: #001080">builder</span>
 </code></pre>
-				<p>通过 <code>script</code> 标签方式引入
-				使用 QueryOrmBuilder 最简单的方法是直接在 html 文件中引入 之后你可以通过全局变量 QueryOrmBuilder 访问。</p>
-				<pre><code class="language-html"><span style="color: #000000">   </span><span style="color: #800000">&lt;script</span><span style="color: #000000FF"> </span><span style="color: #FF0000">src</span><span style="color: #000000FF">=</span><span style="color: #0000FF">&quot;query-orm-builder.umd.js&quot;</span><span style="color: #000000FF"> </span><span style="color: #800000">&gt;&lt;/script&gt;</span>
+				<p>2、直接通过 <code>script</code> 标签方式引入使用</p>
+				<p>下载本源码包，在具体页面，引入dist目录下的 query-orm-builder.umd.js</p>
+				<pre><code class="language-html"><span style="color: #000000">   </span><span style="color: #800000">&lt;script</span><span style="color: #000000FF"> </span><span style="color: #FF0000">src</span><span style="color: #000000FF">=</span><span style="color: #0000FF">&quot;dist/query-orm-builder.umd.js&quot;</span><span style="color: #000000FF"> </span><span style="color: #800000">&gt;&lt;/script&gt;</span>
 </code></pre>
 				<a href="#使用案例" id="使用案例" style="color: inherit; text-decoration: none;">
 					<h1>使用案例</h1>
 				</a>
-				<p>npm 模式使用</p>
+				<p>1、npm 模式使用</p>
 				<pre><code class="language-javascritp">  import QueryOrmBuilder from &#39;query-orm-builder&#39;
   let queryOrm=new QueryOrmBuilder();
+  let res = queryOrm.where(&#39;id&#39;,&#39;=&#39;,100).toUriQueryString();
 </code></pre>
-				<p>或通过 <code>script</code> 标签方式引入</p>
+				<p>2、通过 <code>script</code> 标签方式引入</p>
 				<pre><code class="language-javascritp">  let queryOrm=new QueryOrmBuilder();
+  let res = queryOrm.where(&#39;id&#39;,&#39;=&#39;,100).toUriQueryString();
+</code></pre>
+				<p>上面2种方式运行的res结果都为</p>
+				<pre><code class="language-html"><span style="color: #000000">  filter[id{eq}]=100 </span>
+</code></pre>
+				<p>将构建后的结果拼接到请求数据的链接上，发送到后台使用，如：</p>
+				<pre><code class="language-html"><span style="color: #000000">  https://api.test.com/User/DataList?filter[id{eq}]=100 </span>
 </code></pre>
 				<a href="#表达式查询的用法示例如下：" id="表达式查询的用法示例如下：" style="color: inherit; text-decoration: none;">
 					<h2>表达式查询的用法示例如下：</h2>
